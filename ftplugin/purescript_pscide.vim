@@ -214,6 +214,7 @@ function! PSCIDEstart(silent)
   let loglevel = a:silent == 1 ? 1 : 0
 
   let dir = purescript#ide#utils#findRoot()
+  echom dir
   if empty(dir)
     echom "No psc-package.json or bower.json found, couldn't start `purs ide server`"
     return
@@ -224,7 +225,7 @@ function! PSCIDEstart(silent)
 	\ "-p", g:psc_ide_server_port,
 	\ "-d", dir,
 	\ "src/**/*.purs",
-	\ "bower_components/**/*.purs",
+	\ "$(spago sources)",
 	\ ]
 
   exe "lcd" dir

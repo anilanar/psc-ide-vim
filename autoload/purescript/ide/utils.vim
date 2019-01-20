@@ -8,7 +8,10 @@ function! purescript#ide#utils#findRoot()
     if !empty(bower)
       return fnamemodify(bower, ":p:h")
     else
-      return ""
+      let spago = findfile("spago.dhall", fnameescape(expand("%:p:h")).";")
+      if !empty(spago)
+        return fnamemodify(spago, ":p:h")
+      return 
     endif
   endfor
 endfunction
